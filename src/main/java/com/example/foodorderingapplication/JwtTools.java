@@ -1,4 +1,4 @@
-/*package com.example.foodorderingapplication;
+package com.example.foodorderingapplication;
 
 import java.util.List;
 
@@ -12,7 +12,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
 public class JwtTools {
-
     private static final String SECRET = "secret_key";
 
     public static String createToken(User user){
@@ -44,9 +43,7 @@ public class JwtTools {
 
         }catch(Exception e){
         }
-
-
         return authToken;
     }
-    
-}*/
+
+}
