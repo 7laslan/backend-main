@@ -2,26 +2,36 @@ package com.example.foodorderingapplication;
 
 import java.util.Collection;
 
-//import javax.persistence.Column;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 @Entity
-//@Table(name = ???)
+@Table(name = "manager")
 public class RestaurantManager {
+    
+    @Column(name = "name")
+    private String name;
+    
+    @Column(name = "username")
+    private String username;
+    
+    @Column(name = "password")
+    private String password;
 
-    private String name, username, password;
     @Enumerated(EnumType.STRING)
     private Role role;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    //@Column(name = "admin_id")
+    @Column(name = "admin_id")
     private Long adminId;
 
     public RestaurantManager(String name, String username, String password, Role role, Long adminId) {

@@ -1,20 +1,25 @@
 package com.example.foodorderingapplication;
 
-//import javax.persistence.Column;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
-//@Table(name = "orders")
+@Table(name = "orders")
 public class Order {
-
+     
+    @Column(name = "order_status")
     private OrderStatus OrderStatus;
+
+    @Column(name = "final_cost")
     private long finalCost;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    //@Column(name = "order_id")
+    @Column(name = "order_id")
     private Long orderId;
 
     private Order(OrderStatus OrderStatus, long finalCost, Long orderId) {

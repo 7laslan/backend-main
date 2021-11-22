@@ -1,20 +1,28 @@
 package com.example.foodorderingapplication;
 
-//import javax.persistence.Column;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
-//@Table(name "products")
+@Table(name = "products")
 public class Product {
+    
+    @Column(name = "product_name")
+    private String productName;
+    
+    @Column(name = "product_description")
+    private String productDescription;
 
-    private String productName, productDescription;
+    @Column(name = "price")
     private double price;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    //@Column(name = "product_id")
+    @Column(name = "product_id")
     private Long productId;
 
     public Product(String productName, String productDescription, double price, Long productId){
