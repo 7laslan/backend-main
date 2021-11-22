@@ -9,5 +9,7 @@ import org.springframework.stereotype.Repository;
 public interface RestaurantManagerRepo extends JpaRepository<RestaurantManager, String> {
 
     RestaurantManager findManagerById(Long adminId);
+
+    RestaurantManager findByUsername(String username);
     
 }

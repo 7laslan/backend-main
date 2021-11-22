@@ -1,5 +1,7 @@
 package com.example.foodorderingapplication;
 
+import java.util.Collection;
+
 //import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -7,6 +9,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 @Entity
 //@Table(name = ???)
@@ -27,6 +31,9 @@ public class RestaurantManager {
         this.password = password;
         this.role = role;
         this.adminId = adminId;
+    }
+
+    public RestaurantManager(String username2, String password2, Collection<SimpleGrantedAuthority> authorities) {
     }
 
     public Long getAdminId()

@@ -17,6 +17,8 @@ import com.example.foodorderingapplication.Repositories.RestaurantRepo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 // Controllerin toteutus
@@ -55,6 +57,20 @@ public class MyController implements Controller {
     }
 
     @Override
+    public Customer loadCustomerByUsername(String username) throws UsernameNotFoundException {
+        
+        Customer customerDb = customerRepo.findByUsername(username);
+
+        if(customerDb == null){
+            throw new UsernameNotFoundException("Not in database");
+        } else {
+            Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
+            authorities.add(new SimpleGrantedAuthority((customerDb.getRole().toString())));
+            return new Customer(username, customerDb.getPassword(), authorities);
+        }
+    }
+
+    @Override
     public ResponseEntity<Customer> updateCustomer(Long customerId, Customer customer) {
 
         Customer customerDb = customerRepo.findCustomerById(customerId);
@@ -72,10 +88,24 @@ public class MyController implements Controller {
     public RestaurantManager findManagerById(Long adminId) {
         return adminRepo.findManagerById(adminId);
     }
-
+    
     @Override
     public RestaurantManager addManager(RestaurantManager manager){
         return adminRepo.save(manager);
+    }
+
+    @Override
+    public RestaurantManager loadManagerByUsername(String username) throws UsernameNotFoundException {
+
+        RestaurantManager managerDb = adminRepo.findByUsername(username);
+
+        if(managerDb == null){
+            throw new UsernameNotFoundException("Not in database");
+        } else {
+            Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
+            authorities.add(new SimpleGrantedAuthority((managerDb.getRole().toString())));
+            return new RestaurantManager(username, managerDb.getPassword(), authorities);
+        }
     }
 
     @Override

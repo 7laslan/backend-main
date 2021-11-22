@@ -10,4 +10,6 @@ public interface CustomerRepo extends JpaRepository<Customer, String> {
 
     Customer findCustomerById(Long customerId);
 
+    Customer findByUsername(String username);
+
 }

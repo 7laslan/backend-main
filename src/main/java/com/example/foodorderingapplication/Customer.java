@@ -1,5 +1,7 @@
 package com.example.foodorderingapplication;
 
+import java.util.Collection;
+
 //import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -8,13 +10,24 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
 @Entity
 //@Table(name = "customers")
 public class Customer {
+    
+    //@Column(name = "name")
+    private String name;
 
-    private String name, username, password;
+    //@Column(name = "username")
+    private String username;
+
+    //@Column(name = "password")
+    private String password;
+
     @Enumerated(EnumType.STRING)
     private Role role;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     //@Column(name = "customer_id")
@@ -27,6 +40,9 @@ public class Customer {
         this.password = password;
         this.role = role;
         this.customerId = customerId;
+    }
+
+    public Customer(String username2, String password2, Collection<SimpleGrantedAuthority> authorities) {
     }
 
     public Long getCustomerId()

@@ -10,6 +10,7 @@ import com.example.foodorderingapplication.Restaurant;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,6 +38,12 @@ public class RController {
         return controller.findCustomerById(customerId);
     }
 
+    @GetMapping("/Customer")
+    public ResponseEntity<String> setCustomer(){
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        return ResponseEntity.ok("Log in as customer" +username);
+    }
+
     @PostMapping
     public Customer insert(@RequestBody Customer customer){
         return controller.addCustomer(customer);
@@ -51,6 +58,12 @@ public class RController {
     @GetMapping("/getRestaurantManager/{id}")
     public RestaurantManager getRestaurantManager(@PathVariable Long adminId){
         return controller.findManagerById(adminId);
+    }
+
+    @GetMapping("/admin")
+    public ResponseEntity<String> setAdmin(){
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        return ResponseEntity.ok("Logged in as Admin" +username);
     }
 
     @PostMapping
